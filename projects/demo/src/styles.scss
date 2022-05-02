@@ -1,0 +1,15 @@
+.demo-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 10%;
+
+  input {
+    font-size: 30px;
+    border-radius: 3px;
+    border: 1px solid #DADEDF;
+
+    &:focus {
+      outline: none;
+    }
+  }
+}

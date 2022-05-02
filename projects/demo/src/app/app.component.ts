@@ -2,9 +2,15 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  templateUrl: './app.component.html'
 })
 export class AppComponent {
-  title = 'demo';
+  public inputValue: string = '';
+
+  constructor() {
+  }
+
+  public selectEmoji(emoji: string): void {
+    this.inputValue += emoji;
+  }
 }

@@ -4,5 +4,10 @@
   "peerDependencies": {
     "@angular/common": "^8.2.0",
     "@angular/core": "^8.2.0"
+  },
+  "description": "emoji picker plugin (angular 8.2.1)",
+  "author": {
+    "name": "Alla Davtyan",
+    "email": "alla.davtyan99@gmail.com"
   }
 }
