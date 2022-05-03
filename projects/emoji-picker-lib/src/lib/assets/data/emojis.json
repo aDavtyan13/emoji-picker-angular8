@@ -385,18 +385,6 @@
       "categoryId": 1
     },
     {
-      "id": 18,
-      "name": "smiling face",
-      "emoji": "☺",
-      "keywords": [
-        "love",
-        "beautiful",
-        "red",
-        "cheeks"
-      ],
-      "categoryId": 1
-    },
-    {
       "id": 19,
       "name": "slightly smiling face",
       "emoji": "🙂",

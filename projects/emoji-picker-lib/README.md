@@ -7,10 +7,10 @@ This library will help you to use Unicode emojis. There are 8 categories with 15
 ### Attributes
 Attributes   | Description
 -------------|--------------
-@Input() <br> **customClass**: string | You can add custom class to customize plugin
-@Input() <br> **btnIcon**: string | You can add custom icon to button, from where emoji picker will open <br> default icon - <img src="https://freesvg.org/img/1456705995.png" height="20px" width="20px">
-@Input() <br> **searchIcon**: string | You can add custom search icon to search input <br> default icon - <img src="https://icons.veryicon.com/png/o/miscellaneous/easemob-icon/search-934.png" height="20px" width="20px">
-@Input() <br> **emojisPerRow**: string | You can add number to indicate how many emojis will be in one row <br> defatuls is 9
+@Input() <br> **customClass**: string | You can add custom class to customize plugin UI
+@Input() <br> **btnIcon**: string | You can add custom icon to button, from where emoji picker will open <br> default is this image - <img src="https://freesvg.org/img/1456705995.png" height="20px" width="20px">
+@Input() <br> **searchIcon**: string | You can add custom search icon to search input <br> default is this image - <img src="https://icons.veryicon.com/png/o/miscellaneous/easemob-icon/search-934.png" height="20px" width="20px">
+@Input() <br> **emojisPerRow**: string | You can add number to indicate how many emojis will be in one row <br> default is 9
 @Output() <br> **selectEmojiEvent**: EventEmitter< string >() | Event will be fired when emoji selected
 
 ### Example and Sample Code
@@ -29,12 +29,12 @@ import { EmojiPickerLibModule } from "emoji-picker-lib";
 
 2) **Add _'emoji-picker'_ in your component html**
 ```html
-<lib-emoji-picker   [data]="emojiData"
-                    [customClass]="'customClass'"
-                    [emojisPerRow]="7"
-                    [btnIcon]="'fas fa-smile'"
-                    [searchIcon]="'fas fa-search'"
-                    (selectEmojiEvent)="selectEmoji($event)"></lib-emoji-picker>
+<emoji-picker   [data]="emojiData"
+                [customClass]="'customClass'"
+                [emojisPerRow]="7"
+                [btnIcon]="'fas fa-smile'"
+                [searchIcon]="'fas fa-search'"
+                (selectEmojiEvent)="selectEmoji($event)"></emoji-picker>
 ```
 
 3) **Add a method in your component class to listen for **selectEmojiEvent** event**
@@ -42,4 +42,26 @@ import { EmojiPickerLibModule } from "emoji-picker-lib";
 selectEmoji(emoji: string): void {
   console.log(emoji);
 }
+```
+
+4) **Add styles and assets folder in your angular.json**
+
+```json
+"styles": [
+  ..
+  "node_modules/emoji-picker-lib/lib/assets/sass/emoji-picker.scss"
+  ..
+]
+```
+AND
+```json
+"assets": [
+  ..
+  {
+    "glob": "**/*",
+    "input": "node_modules/emoji-picker-lib/lib/assets",
+    "output": "/assets/"
+  }
+  ..
+]
 ```

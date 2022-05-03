@@ -59,7 +59,7 @@
               "projects/demo/src/assets",
               {
                 "glob": "**/*",
-                "input": "dist/emoji-picker-lib/lib/assets/assets",
+                "input": "dist/emoji-picker-lib/lib/assets",
                 "output": "/assets/"
               }
             ],

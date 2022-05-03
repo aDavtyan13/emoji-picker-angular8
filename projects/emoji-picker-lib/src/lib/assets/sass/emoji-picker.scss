@@ -31,8 +31,6 @@ $emoji-picker-category-icon-size: 1.25rem;
     }
 
     &--btn {
-      height: 40px;
-      width: 40px;
       border: $border-width solid #DADEDF;
       padding: .25rem;
       display: flex;
@@ -53,7 +51,8 @@ $emoji-picker-category-icon-size: 1.25rem;
       width: 100%;
       font-size: 1rem;
       border-radius: 4px;
-      padding: $emoji-picker-search-input-p-y calc(#{2 * $emoji-picker-search-input-p-x} + #{$emoji-picker-icon-size}) $emoji-picker-search-input-p-y $emoji-picker-search-input-p-x;
+      padding: $emoji-picker-search-input-p-y calc(#{2 * $emoji-picker-search-input-p-x} + #{$emoji-picker-icon-size})
+               $emoji-picker-search-input-p-y $emoji-picker-search-input-p-x;
 
       &:focus {
         outline: none;
@@ -85,6 +84,8 @@ $emoji-picker-category-icon-size: 1.25rem;
     position: absolute;
     top: 100%;
     left: 0;
+    background-color: #fff;
+    z-index: 99;
   }
 
   &--categories, &--emojis {

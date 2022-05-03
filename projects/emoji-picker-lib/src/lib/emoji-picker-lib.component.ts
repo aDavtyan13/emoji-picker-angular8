@@ -75,7 +75,7 @@ export class EmojiPickerLibComponent implements OnInit, OnDestroy {
         this.selectedEmojis = this.data.emojis.filter((emoji: IEmoji) =>
           emoji.keywords.some((key: string) => key.toLowerCase().includes(this.searchValue.toLowerCase())) ||
           emoji.name.toLowerCase().includes(this.searchValue.toLowerCase())
-        )
+        );
         this.unselectAllCategories();
       }, 800);
     } else {
