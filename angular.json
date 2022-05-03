@@ -59,13 +59,13 @@
               "projects/demo/src/assets",
               {
                 "glob": "**/*",
-                "input": "./projects/emoji-picker-lib/src/assets/",
+                "input": "dist/emoji-picker-lib/lib/assets/assets",
                 "output": "/assets/"
               }
             ],
             "styles": [
               "projects/demo/src/styles.scss",
-              "projects/emoji-picker-lib/src/assets/sass/emoji-picker.scss"
+              "projects/emoji-picker-lib/src/lib/assets/sass/emoji-picker.scss"
             ],
             "scripts": []
           },
@@ -127,7 +127,8 @@
             "karmaConfig": "projects/demo/karma.conf.js",
             "assets": [
               "projects/demo/src/favicon.ico",
-              "projects/demo/src/assets"
+              "projects/demo/src/assets",
+              "projects/emoji-picker-lib/src/lib/assets"
             ],
             "styles": [
               "projects/demo/src/styles.scss"

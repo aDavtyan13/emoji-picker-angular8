@@ -14,14 +14,14 @@ Attributes   | Description
 @Output() <br> **selectEmojiEvent**: EventEmitter< string >() | Event will be fired when emoji selected
 
 ### Example and Sample Code
-1) **Import _'EmojiPickerModule'_ in your app module**
+1) **Import _'EmojiPickerLibModule'_ in your app module**
 ```ts
-import { EmojiPickerModule } from "emoji-picker";
+import { EmojiPickerLibModule } from "emoji-picker-lib";
   
 @NgModule({
   imports:[
     ..
-    EmojiPickerModule
+    EmojiPickerLibModule
     ..
   ]
 })
