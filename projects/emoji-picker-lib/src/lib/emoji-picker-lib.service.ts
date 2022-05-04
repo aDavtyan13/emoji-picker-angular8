@@ -1,6 +1,4 @@
-import {Observable} from 'rxjs';
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
 
 import {IDataInterface} from './@core/interfaces/data.interface';
 
@@ -8,10 +6,7 @@ import {IDataInterface} from './@core/interfaces/data.interface';
   providedIn: 'root'
 })
 export class EmojiPickerService {
-  constructor(private http: HttpClient) {
-  }
-
-  public getEmojis(): Observable<IDataInterface> {
-    return this.http.get<IDataInterface>('./assets/data/emojis.json');
+  public getEmojis(): Promise<IDataInterface> {
+    return fetch('./assets/data/emojis.json').then(result => result.json());
   }
 }

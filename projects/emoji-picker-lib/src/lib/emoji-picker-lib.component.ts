@@ -1,6 +1,5 @@
-import {Subscription} from 'rxjs';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ICategory, IDataInterface, IEmoji} from './@core/interfaces/data.interface';
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 
 import {EmojiPickerService} from './emoji-picker-lib.service';
 
@@ -8,7 +7,7 @@ import {EmojiPickerService} from './emoji-picker-lib.service';
   selector: 'emoji-picker',
   templateUrl: './emoji-picker-lib.component.html'
 })
-export class EmojiPickerLibComponent implements OnInit, OnDestroy {
+export class EmojiPickerLibComponent implements OnInit {
   @Input() btnIcon!: string;
   @Input() searchIcon?: string;
   @Input() customClass: string = '';
@@ -16,7 +15,6 @@ export class EmojiPickerLibComponent implements OnInit, OnDestroy {
 
   @Output() selectEmojiEvent: EventEmitter<string> = new EventEmitter<string>();
 
-  private subscription!: Subscription;
   private searchTimer!: ReturnType<typeof setTimeout>;
 
   public data!: IDataInterface;
@@ -31,14 +29,8 @@ export class EmojiPickerLibComponent implements OnInit, OnDestroy {
     this.getEmojis();
   }
 
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
-  }
-
   private getEmojis(): void {
-    this.subscription = this.emojiPickerService.getEmojis().subscribe((data: IDataInterface) => {
-      this.data = data;
-    });
+    this.emojiPickerService.getEmojis().then((data: IDataInterface) => this.data = data);
   }
 
   private unselectAllCategories(): void {
