@@ -16,4 +16,5 @@ export interface IEmoji {
   emoji: string;
   keywords: string[];
   categoryId: number;
+  isSupported?: boolean;
 }

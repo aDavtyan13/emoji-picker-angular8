@@ -28,12 +28,13 @@
       </ng-template>
     </div>
     <div class="emoji-picker--emojis">
-      <div class="emoji-picker--emoji"
-           *ngFor="let emoji of selectedEmojis"
-           (click)="selectEmoji(emoji.emoji)"
-           [ngStyle]="{'width': calcEmojiSize(emojisPerRow)}">
-        <div title="{{emoji?.name}}">{{emoji?.emoji}}</div>
-      </div>
+      <ng-container *ngFor="let emoji of selectedEmojis">
+        <div *ngIf="emoji.isSupported" class="emoji-picker--emoji"
+             (click)="selectEmoji(emoji.emoji)"
+             [ngStyle]="{'width': calcEmojiSize(emojisPerRow)}">
+          <div title="{{emoji?.name}}">{{emoji?.emoji}}</div>
+        </div>
+      </ng-container>
     </div>
   </div>
 </div>

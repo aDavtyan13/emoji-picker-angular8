@@ -1,13 +1,16 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {ICategory, IDataInterface, IEmoji} from './@core/interfaces/data.interface';
 
-import {EmojiPickerService} from './emoji-picker-lib.service';
+import {EmojisSharedService} from './@core/services/emojis.shared';
+import {ICategory, IDataInterface, IEmoji} from './@core/interfaces/data.interface';
 
 @Component({
   selector: 'emoji-picker',
   templateUrl: './emoji-picker-lib.component.html'
 })
 export class EmojiPickerLibComponent implements OnInit {
+  constructor(private emojisSharedService: EmojisSharedService) {
+  }
+
   @Input() btnIcon!: string;
   @Input() searchIcon?: string;
   @Input() customClass: string = '';
@@ -17,20 +20,19 @@ export class EmojiPickerLibComponent implements OnInit {
 
   private searchTimer!: ReturnType<typeof setTimeout>;
 
-  public data!: IDataInterface;
-  public selectedEmojis!: IEmoji[];
+  public data: IDataInterface;
   public searchValue: string = '';
+  public selectedEmojis!: IEmoji[];
   public showEmojiPicker: boolean = false;
-
-  constructor(private emojiPickerService: EmojiPickerService) {
-  }
 
   ngOnInit() {
     this.getEmojis();
   }
 
   private getEmojis(): void {
-    this.emojiPickerService.getEmojis().then((data: IDataInterface) => this.data = data);
+    this.emojisSharedService.data.subscribe(data => {
+      this.data = data;
+    });
   }
 
   private unselectAllCategories(): void {
@@ -56,8 +58,11 @@ export class EmojiPickerLibComponent implements OnInit {
   }
 
   public toggleEmojiPicker(): void {
-    this.showSelectedEmojis(0);
-    this.showEmojiPicker = !this.showEmojiPicker;
+    try {
+      this.showSelectedEmojis(0);
+      this.showEmojiPicker = !this.showEmojiPicker;
+    } catch (error) {
+    }
   }
 
   public searchElement(): void {
