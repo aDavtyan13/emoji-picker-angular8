@@ -15,11 +15,11 @@ export class EmojiPickerLibComponent implements OnInit {
   @Input() searchIcon?: string;
   @Input() customClass: string = '';
   @Input() emojisPerRow: number = 9;
+  @Input() emojiPickerRight: boolean = false;
 
   @Output() selectEmojiEvent: EventEmitter<string> = new EventEmitter<string>();
 
-  private searchTimer!: ReturnType<typeof setTimeout>;
-
+  public categoryName: string;
   public data: IDataInterface;
   public searchValue: string = '';
   public selectedEmojis!: IEmoji[];
@@ -43,6 +43,7 @@ export class EmojiPickerLibComponent implements OnInit {
     this.unselectAllCategories();
     this.data.categories[index].selected = true;
     this.selectedEmojis = this.data.emojis.filter((emoji: IEmoji) => emoji.categoryId === index + 1);
+    this.categoryName = this.data.categories[index].name;
   }
 
   public calcEmojiSize(count: number): string {
@@ -67,16 +68,13 @@ export class EmojiPickerLibComponent implements OnInit {
 
   public searchElement(): void {
     if (this.searchValue) {
-      clearTimeout(this.searchTimer);
-      this.searchTimer = setTimeout(() => {
-        this.selectedEmojis = this.data.emojis.filter((emoji: IEmoji) =>
-          emoji.keywords.some((key: string) => key.toLowerCase().includes(this.searchValue.toLowerCase())) ||
-          emoji.name.toLowerCase().includes(this.searchValue.toLowerCase())
-        );
-        this.unselectAllCategories();
-      }, 800);
+      this.selectedEmojis = this.data.emojis.filter((emoji: IEmoji) =>
+        emoji.keywords.some((key: string) => key.toLowerCase().includes(this.searchValue.toLowerCase())) ||
+        emoji.name.toLowerCase().includes(this.searchValue.toLowerCase())
+      );
+      this.unselectAllCategories();
     } else {
-      setTimeout(() => this.chooseCategory(0), 800);
+      this.chooseCategory(0);
     }
   }
 

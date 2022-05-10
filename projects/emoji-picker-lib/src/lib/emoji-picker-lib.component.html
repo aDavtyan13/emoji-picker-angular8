@@ -1,6 +1,7 @@
 <div class="emoji-picker" outClick (outClickEvent)="closeEmojiPicker()">
   <button type="button" class="emoji-picker--icon--btn"
-          (click)="toggleEmojiPicker()">
+          (click)="toggleEmojiPicker()"
+          [ngClass]="{'active': showEmojiPicker}">
     <ng-container *ngIf="btnIcon; else btnIconImg">
       <span class="{{btnIcon}} emoji-picker--icon"></span>
     </ng-container>
@@ -8,7 +9,9 @@
       <img src="assets/images/emoji.svg" alt="" class="emoji-picker--icon--img">
     </ng-template>
   </button>
-  <div *ngIf="showEmojiPicker" class="emoji-picker--block">
+  <div *ngIf="showEmojiPicker"
+       [ngClass]="{'emoji-picker--block--right': emojiPickerRight}"
+       class="emoji-picker--block">
     <div class="emoji-picker--categories">
       <div class="emoji-picker--category"
            *ngFor="let category of data?.categories; let i = index;"
@@ -27,7 +30,9 @@
         <img src="assets/images/search.svg" class="emoji-picker--icon--img" alt="">
       </ng-template>
     </div>
-    <div class="emoji-picker--emojis">
+    <p *ngIf="!searchValue" class="emoji-picker--category-name">{{categoryName}}</p>
+    <div class="emoji-picker--emojis"
+         [ngClass]="{'emoji-picker--emojis--full-height': searchValue}">
       <ng-container *ngFor="let emoji of selectedEmojis">
         <div *ngIf="emoji.isSupported" class="emoji-picker--emoji"
              (click)="selectEmoji(emoji.emoji)"
