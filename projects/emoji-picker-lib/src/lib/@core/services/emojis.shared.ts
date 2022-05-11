@@ -18,7 +18,7 @@ export class EmojisSharedService {
     });
   }
 
-  static supportsEmoji(item: string) {
+  static supportsEmoji(item: string): boolean {
     const ctx = document.createElement('canvas').getContext('2d');
     ctx.canvas.width = ctx.canvas.height = 1;
     ctx.fillText(item, -4, 4);
