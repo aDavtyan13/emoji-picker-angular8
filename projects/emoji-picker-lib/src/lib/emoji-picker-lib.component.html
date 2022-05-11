@@ -41,11 +41,10 @@
 <!--        </div>-->
 <!--      </ng-container>-->
 
-      <div *ngFor="let emoji of selectedEmojis">
-        <div (click)="selectEmoji(emoji.emoji)"
-             [ngStyle]="{'width': calcEmojiSize(emojisPerRow)}">
-          <div title="{{emoji?.name}}">{{emoji?.emoji}}</div>
-        </div>
+      <div *ngFor="let emoji of selectedEmojis"
+           (click)="selectEmoji(emoji.emoji)"
+           [ngStyle]="{'width': calcEmojiSize(emojisPerRow)}">
+        <div title="{{emoji?.name}}">{{emoji?.emoji}}</div>
       </div>
     </div>
   </div>
