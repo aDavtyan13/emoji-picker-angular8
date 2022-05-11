@@ -12,7 +12,7 @@ export class EmojisSharedService {
   constructor(private emojiPickerService: EmojiPickerService) {
     this.emojiPickerService.getEmojis().then((data: IDataInterface) => {
       data.emojis.forEach((element) => {
-        element.isSupported = !!element.isSupported || EmojisSharedService.supportsEmoji(element.emoji);
+        element.isSupported = EmojisSharedService.supportsEmoji(element.emoji);
       });
       this.emojis.next(data);
     });
