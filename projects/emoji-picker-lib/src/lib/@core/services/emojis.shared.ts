@@ -11,17 +11,17 @@ export class EmojisSharedService {
 
   constructor(private emojiPickerService: EmojiPickerService) {
     this.emojiPickerService.getEmojis().then((data: IDataInterface) => {
-      data.emojis.forEach((element) => {
-        element.isSupported = !!element.isSupported || EmojisSharedService.supportsEmoji(element.emoji);
-      });
+      // data.emojis.forEach((element) => {
+        // element.isSupported = !!element.isSupported || EmojisSharedService.supportsEmoji(element.emoji);
+      // });
       this.emojis.next(data);
     });
   }
 
-  static supportsEmoji(item: string) {
-    const ctx = document.createElement('canvas').getContext('2d');
-    ctx.canvas.width = ctx.canvas.height = 1;
-    ctx.fillText(item, -4, 4);
-    return ctx.getImageData(0, 0, 1, 1).data[1] > 0;
-  }
+  // static supportsEmoji(item: string) {
+  //   const ctx = document.createElement('canvas').getContext('2d');
+  //   ctx.canvas.width = ctx.canvas.height = 1;
+  //   ctx.fillText(item, -4, 4);
+  //   return ctx.getImageData(0, 0, 1, 1).data[1] > 0;
+  // }
 }
