@@ -33,19 +33,19 @@
     <p *ngIf="!searchValue" class="emoji-picker--category-name">{{categoryName}}</p>
     <div class="emoji-picker--emojis"
          [ngClass]="{'emoji-picker--emojis--full-height': searchValue}">
-<!--      <ng-container *ngFor="let emoji of selectedEmojis">-->
-<!--        <div *ngIf="emoji.isSupported" class="emoji-picker&#45;&#45;emoji"-->
-<!--             (click)="selectEmoji(emoji.emoji)"-->
-<!--             [ngStyle]="{'width': calcEmojiSize(emojisPerRow)}">-->
-<!--          <div title="{{emoji?.name}}">{{emoji?.emoji}}</div>-->
-<!--        </div>-->
-<!--      </ng-container>-->
+      <ng-container *ngFor="let emoji of selectedEmojis">
+        <div *ngIf="emoji.isSupported" class="emoji-picker--emoji"
+             (click)="selectEmoji(emoji.emoji)"
+             [ngStyle]="{'width': calcEmojiSize(emojisPerRow)}">
+          <div title="{{emoji?.name}}">{{emoji?.emoji}}</div>
+        </div>
+      </ng-container>
 
-      <div *ngFor="let emoji of selectedEmojis"
-           (click)="selectEmoji(emoji.emoji)"
-           [ngStyle]="{'width': calcEmojiSize(emojisPerRow)}">
-        <div title="{{emoji?.name}}">{{emoji?.emoji}}</div>
-      </div>
+<!--      <div *ngFor="let emoji of selectedEmojis"-->
+<!--           (click)="selectEmoji(emoji.emoji)"-->
+<!--           [ngStyle]="{'width': calcEmojiSize(emojisPerRow)}">-->
+<!--        <div title="{{emoji?.name}}">{{emoji?.emoji}}</div>-->
+<!--      </div>-->
     </div>
   </div>
 </div>
