@@ -31,7 +31,6 @@ export class EmojiPickerLibComponent implements OnInit {
 
   private getEmojis(): void {
     this.emojisSharedService.data.subscribe(data => {
-      this.emojisSharedService.checkEmojiSupport(data);
       this.data = data;
     });
   }
@@ -61,6 +60,7 @@ export class EmojiPickerLibComponent implements OnInit {
 
   public toggleEmojiPicker(): void {
     try {
+      this.emojisSharedService.checkEmojiSupport(this.data);
       this.showSelectedEmojis(0);
       this.showEmojiPicker = !this.showEmojiPicker;
     } catch (error) {
