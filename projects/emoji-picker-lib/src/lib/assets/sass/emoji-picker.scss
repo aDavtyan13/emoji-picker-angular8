@@ -94,14 +94,19 @@ $emoji-picker-category-name-size: .875rem;
     height: $emoji-picker-block-h;
     width: $emoji-picker-block-w;
     position: absolute;
-    top: 100%;
+    top: calc(100% + #{$border-width});
     left: 0;
     background-color: #fff;
     z-index: 99;
 
-    &.emoji-picker--block--right {
+    &.emoji-picker--block--left {
       right: 0;
       left: auto;
+    }
+
+    &.emoji-picker--block--right {
+      left: 0;
+      right: auto;
     }
   }
 
@@ -177,6 +182,7 @@ $emoji-picker-category-name-size: .875rem;
 
   &--emoji {
     height: 30px;
+    width: 10%;
     font-size: 1.125rem;
   }
 }

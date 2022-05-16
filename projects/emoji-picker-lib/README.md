@@ -1,16 +1,13 @@
 # EmojiPicker
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.0.
+This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.2.0.
 
 This library will help you to use Unicode emojis. There are 8 categories with 1525 emojis.
 
 ### Attributes
 Attributes   | Description
 -------------|--------------
-@Input() <br> **customClass**: string | You can add custom class to customize plugin UI
-@Input() <br> **btnIcon**: string | You can add custom icon to button, from where emoji picker will open <br> default is this image - <img src="https://freesvg.org/img/1456705995.png" height="20px" width="20px">
-@Input() <br> **searchIcon**: string | You can add custom search icon to search input <br> default is this image - <img src="https://icons.veryicon.com/png/o/miscellaneous/easemob-icon/search-934.png" height="20px" width="20px">
-@Input() <br> **emojisPerRow**: string | You can add number to indicate how many emojis will be in one row <br> default is 9
+@Input() <br> **emojiPickerOptions**: IEmojiPickerOptions | You can add options like <ul><li>btnIcon</li><li>searchIcon</li><li>customClass</li><li>emojisPerRow</li><li>emojiPickerPosition</li><li>defaultCatalogId</li></ul> * All are optional
 @Output() <br> **selectEmojiEvent**: EventEmitter< string >() | Event will be fired when emoji selected
 
 ### Example and Sample Code
@@ -29,11 +26,7 @@ import { EmojiPickerLibModule } from "emoji-picker-lib";
 
 2) **Add _'emoji-picker'_ in your component html**
 ```html
-<emoji-picker   [data]="emojiData"
-                [customClass]="'customClass'"
-                [emojisPerRow]="7"
-                [btnIcon]="'fas fa-smile'"
-                [searchIcon]="'fas fa-search'"
+<emoji-picker   [emojiPickerOptions]="emojiPickerOptions"
                 (selectEmojiEvent)="selectEmoji($event)"></emoji-picker>
 ```
 

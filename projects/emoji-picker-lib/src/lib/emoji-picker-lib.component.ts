@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 import {EmojisSharedService} from './@core/services/emojis.shared';
-import {ICategory, IDataInterface, IEmoji} from './@core/interfaces/data.interface';
+import {IData, IEmoji, IEmojiPickerOptions, ISelectedCategory} from './@core/interfaces/data.interface';
 
 @Component({
   selector: 'emoji-picker',
@@ -11,19 +11,13 @@ export class EmojiPickerLibComponent implements OnInit {
   constructor(private emojisSharedService: EmojisSharedService) {
   }
 
-  @Input() btnIcon!: string;
-  @Input() searchIcon?: string;
-  @Input() customClass: string = '';
-  @Input() emojisPerRow: number = 9;
-  @Input() emojiPickerRight: boolean = false;
+  @Input() emojiPickerOptions: IEmojiPickerOptions;
 
   @Output() selectEmojiEvent: EventEmitter<string> = new EventEmitter<string>();
 
-  public categoryName: string;
-  public data: IDataInterface;
-  public searchValue: string = '';
-  public selectedEmojis!: IEmoji[];
-  public showEmojiPicker: boolean = false;
+  public data: IData;
+  public emojis: IEmoji[];
+  public selectedCategory: ISelectedCategory = {} as ISelectedCategory;
 
   ngOnInit() {
     this.getEmojis();
@@ -35,23 +29,18 @@ export class EmojiPickerLibComponent implements OnInit {
     });
   }
 
-  private unselectAllCategories(): void {
-    this.data.categories.forEach((category: ICategory) => category.selected = false);
+  private includesSearchValue(element: string): boolean {
+    return element.includes(this.emojiPickerOptions.searchValue.toLowerCase());
   }
 
-  private showSelectedEmojis(index: number): void {
-    this.unselectAllCategories();
-    this.data.categories[index].selected = true;
-    this.selectedEmojis = this.data.emojis.filter((emoji: IEmoji) => emoji.categoryId === index + 1);
-    this.categoryName = this.data.categories[index].name;
+  public showSelectedEmojis(index: number): void {
+    this.selectedCategory.category = this.data.categories[index];
+    this.selectedCategory.emojis = this.data.emojis.filter((emoji: IEmoji) => emoji.categoryId === this.selectedCategory.category.id);
+    this.emojis = this.selectedCategory.emojis;
   }
 
   public calcEmojiSize(count: number): string {
     return `${100 / count}%`;
-  }
-
-  public chooseCategory(index: number): void {
-    this.showSelectedEmojis(index);
   }
 
   public selectEmoji(emoji: string): void {
@@ -61,26 +50,24 @@ export class EmojiPickerLibComponent implements OnInit {
   public toggleEmojiPicker(): void {
     try {
       this.emojisSharedService.checkEmojiSupport(this.data);
-      this.showSelectedEmojis(0);
-      this.showEmojiPicker = !this.showEmojiPicker;
+      this.showSelectedEmojis(this.emojiPickerOptions.defaultCatalogId || 0);
+      this.emojiPickerOptions.showEmojiPicker = !this.emojiPickerOptions.showEmojiPicker;
     } catch (error) {
     }
   }
 
   public searchElement(): void {
-    if (this.searchValue) {
-      this.selectedEmojis = this.data.emojis.filter((emoji: IEmoji) =>
-        emoji.keywords.some((key: string) => key.toLowerCase().includes(this.searchValue.toLowerCase())) ||
-        emoji.name.toLowerCase().includes(this.searchValue.toLowerCase())
+    if (this.emojiPickerOptions.searchValue) {
+      this.emojis = this.data.emojis.filter((emoji: IEmoji) =>
+        emoji.keywords.some((key: string) => this.includesSearchValue(key.toLowerCase())) || this.includesSearchValue(emoji.name)
       );
-      this.unselectAllCategories();
     } else {
-      this.chooseCategory(0);
+      this.showSelectedEmojis(0);
     }
   }
 
   public closeEmojiPicker(): void {
-    this.showEmojiPicker = false;
-    this.searchValue = '';
+    this.emojiPickerOptions.showEmojiPicker = false;
+    this.emojiPickerOptions.searchValue = '';
   }
 }

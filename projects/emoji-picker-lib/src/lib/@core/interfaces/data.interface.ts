@@ -1,4 +1,4 @@
-export interface IDataInterface {
+export interface IData {
   categories: ICategory[];
   emojis: IEmoji[];
 }
@@ -8,6 +8,7 @@ export interface ICategory {
   name: string;
   emoji: string;
   selected?: boolean;
+  emojis?: IEmoji[];
 }
 
 export interface IEmoji {
@@ -17,4 +18,20 @@ export interface IEmoji {
   keywords: string[];
   categoryId: number;
   isSupported?: boolean;
+}
+
+export interface IEmojiPickerOptions {
+  btnIcon?: string;
+  searchIcon?: string;
+  customClass?: string;
+  emojisPerRow?: number;
+  emojiPickerPosition?: string;
+  showEmojiPicker?: boolean;
+  searchValue?: string;
+  defaultCatalogId?: number;
+}
+
+export interface ISelectedCategory {
+  category: ICategory;
+  emojis: IEmoji[];
 }

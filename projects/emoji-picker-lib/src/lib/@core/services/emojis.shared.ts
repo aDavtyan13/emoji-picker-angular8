@@ -1,22 +1,22 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
 
+import {IData, IEmoji} from '../interfaces/data.interface';
 import {EmojiPickerService} from '../../emoji-picker-lib.service';
-import {IDataInterface, IEmoji} from '../interfaces/data.interface';
 
 @Injectable()
 export class EmojisSharedService {
   private ctx: CanvasRenderingContext2D;
-  private emojis: BehaviorSubject<IDataInterface> = new BehaviorSubject<IDataInterface>({} as IDataInterface);
+  private emojis: BehaviorSubject<IData> = new BehaviorSubject<IData>({} as IData);
 
-  public data: Observable<IDataInterface> = this.emojis.asObservable();
+  public data: Observable<IData> = this.emojis.asObservable();
 
   constructor(private emojiPickerService: EmojiPickerService) {
     this.getEmojis();
   }
 
   private getEmojis(): void {
-    this.emojiPickerService.getEmojis().then((data: IDataInterface) => this.emojis.next(data));
+    this.emojiPickerService.getEmojis().then((data: IData) => this.emojis.next(data));
   }
 
   private isEmoji(item: string): boolean {
@@ -25,7 +25,7 @@ export class EmojisSharedService {
     return this.ctx.getImageData(0, 0, 1, 1).data[1] > 0;
   }
 
-  public checkEmojiSupport(data: IDataInterface): void {
+  public checkEmojiSupport(data: IData): void {
     if (this.ctx || !data.emojis) {
       return;
     }
