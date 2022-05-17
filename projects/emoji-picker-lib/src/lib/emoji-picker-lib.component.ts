@@ -16,11 +16,18 @@ export class EmojiPickerLibComponent implements OnInit {
   @Output() selectEmojiEvent: EventEmitter<string> = new EventEmitter<string>();
 
   public data: IData;
-  public emojis: IEmoji[];
   public selectedCategory: ISelectedCategory = {} as ISelectedCategory;
 
-  ngOnInit() {
+  ngOnInit(): void {
+    this.initData();
     this.getEmojis();
+  }
+
+  private initData(): void {
+    this.emojiPickerOptions = {
+      emojisPerRow: 9,
+      defaultCatalogId: 0
+    };
   }
 
   private getEmojis(): void {
@@ -36,7 +43,6 @@ export class EmojiPickerLibComponent implements OnInit {
   public showSelectedEmojis(index: number): void {
     this.selectedCategory.category = this.data.categories[index];
     this.selectedCategory.emojis = this.data.emojis.filter((emoji: IEmoji) => emoji.categoryId === this.selectedCategory.category.id);
-    this.emojis = this.selectedCategory.emojis;
   }
 
   public calcEmojiSize(count: number): string {
@@ -50,7 +56,7 @@ export class EmojiPickerLibComponent implements OnInit {
   public toggleEmojiPicker(): void {
     try {
       this.emojisSharedService.checkEmojiSupport(this.data);
-      this.showSelectedEmojis(this.emojiPickerOptions.defaultCatalogId || 0);
+      this.showSelectedEmojis(this.emojiPickerOptions.defaultCatalogId);
       this.emojiPickerOptions.showEmojiPicker = !this.emojiPickerOptions.showEmojiPicker;
     } catch (error) {
     }
@@ -58,7 +64,7 @@ export class EmojiPickerLibComponent implements OnInit {
 
   public searchElement(): void {
     if (this.emojiPickerOptions.searchValue) {
-      this.emojis = this.data.emojis.filter((emoji: IEmoji) =>
+      this.selectedCategory.emojis = this.data.emojis.filter((emoji: IEmoji) =>
         emoji.keywords.some((key: string) => this.includesSearchValue(key.toLowerCase())) || this.includesSearchValue(emoji.name)
       );
     } else {

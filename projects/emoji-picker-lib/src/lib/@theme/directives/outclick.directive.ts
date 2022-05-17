@@ -9,7 +9,7 @@ export class OutClickDirective {
 
   @HostListener('document:click', ['$event'])
   toggleOpen(event: any) {
-    if ((!this.elRef.nativeElement.contains(event.target))) {
+    if (!this.elRef.nativeElement.contains(event.target)) {
       this.outClickEvent.emit();
     }
   }

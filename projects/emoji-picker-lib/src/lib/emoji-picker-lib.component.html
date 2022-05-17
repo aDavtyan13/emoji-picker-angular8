@@ -11,7 +11,7 @@
     </ng-template>
   </button>
   <div *ngIf="emojiPickerOptions?.showEmojiPicker"
-       [ngClass]="emojiPickerOptions?.emojiPickerPosition ? 'emoji-picker--block--' + emojiPickerOptions?.emojiPickerPosition : ''"
+       [ngClass]="emojiPickerOptions?.emojiPickerPosition ? 'emoji-picker--block--' + emojiPickerOptions.emojiPickerPosition : ''"
        class="emoji-picker--block">
     <div class="emoji-picker--categories">
       <div class="emoji-picker--category"
@@ -34,7 +34,7 @@
     <p *ngIf="!emojiPickerOptions.searchValue" class="emoji-picker--category-name">{{selectedCategory?.category.name}}</p>
     <div class="emoji-picker--emojis"
          [ngClass]="{'emoji-picker--emojis--full-height': emojiPickerOptions.searchValue}">
-      <ng-container *ngFor="let emoji of emojis">
+      <ng-container *ngFor="let emoji of selectedCategory?.emojis">
         <div *ngIf="emoji.isSupported" class="emoji-picker--emoji"
              (click)="selectEmoji(emoji.emoji)"
              [ngStyle]="{'width': calcEmojiSize(emojiPickerOptions?.emojisPerRow)}">
