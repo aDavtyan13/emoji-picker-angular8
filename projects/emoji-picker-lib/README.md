@@ -2,6 +2,8 @@
 
 This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.2.0.
 
+See live demo <a href="https://adavtyan13.github.io/emoji-picker-angular8/">here</a>.
+
 This library will help you to use Unicode emojis. There are 8 categories with 1525 emojis.
 
 ### Attributes
