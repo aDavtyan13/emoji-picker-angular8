@@ -11,7 +11,7 @@ export class EmojiPickerLibComponent implements OnInit {
   constructor(private emojisSharedService: EmojisSharedService) {
   }
 
-  @Input() emojiPickerOptions: IEmojiPickerOptions;
+  @Input() emojiPickerOptions: IEmojiPickerOptions = {};
 
   @Output() selectEmojiEvent: EventEmitter<string> = new EventEmitter<string>();
 
@@ -26,7 +26,8 @@ export class EmojiPickerLibComponent implements OnInit {
   private initData(): void {
     this.emojiPickerOptions = {
       emojisPerRow: 9,
-      defaultCatalogId: 0
+      defaultCatalogId: 0,
+      ...this.emojiPickerOptions
     };
   }
 
