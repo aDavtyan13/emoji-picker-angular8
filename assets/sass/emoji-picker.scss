@@ -1,0 +1,188 @@
+$border-width: 1px;
+$line-height-base: 1.5;
+$emoji-picker-block-h: 300px;
+$emoji-picker-block-w: 280px;
+$emoji-picker-icon-size: 1rem;
+$emoji-picker-search-p: .25rem;
+$emoji-picker-emojis-p: .25rem;
+$emoji-picker-emoji-p: .25rem;
+$emoji-picker-icon-spacing: 1rem;
+$emoji-picker-search-input-p-y: .25rem;
+$emoji-picker-search-input-p-x: .75rem;
+$emoji-picker-category-icon-size: 1.25rem;
+$emoji-picker-category-name-size: .875rem;
+
+.emoji-picker, .emoji-picker * {
+  line-height: 1.5;
+  box-sizing: border-box;
+}
+
+.emoji-picker {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+
+  &--icon {
+    font-size: 20px;
+    color: #DADEDF;
+
+    &--img {
+      height: 1.25rem;
+      width: 1.25rem;
+    }
+
+    &--btn {
+      border: none;
+      padding: .25rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 4px;
+      background-color: #fff;
+      cursor: pointer;
+
+      &.active {
+        background-color: #F2F3F4;
+      }
+    }
+  }
+
+  &--category-name {
+    margin: 0;
+    font-size: $emoji-picker-category-name-size;
+    padding: 0 .5rem;
+  }
+
+  &--search {
+    padding: $emoji-picker-search-p;
+    position: relative;
+
+    input {
+      border: $border-width solid #DADEDF;
+      width: 100%;
+      font-size: 1rem;
+      border-radius: 4px;
+      padding: $emoji-picker-search-input-p-y calc(#{2 * $emoji-picker-search-input-p-x} + #{$emoji-picker-icon-size})
+               $emoji-picker-search-input-p-y $emoji-picker-search-input-p-x;
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    .emoji-picker--icon {
+      font-size: $emoji-picker-icon-size;
+
+      &--img {
+        height: 1.25rem;
+        width: 1.25rem;
+      }
+    }
+
+    .emoji-picker--icon, .emoji-picker--icon--img {
+      position: absolute;
+      right: $emoji-picker-icon-spacing;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
+
+  &--block {
+    border: $border-width solid #DADEDF;
+    border-radius: .25rem;
+    height: $emoji-picker-block-h;
+    width: $emoji-picker-block-w;
+    position: absolute;
+    top: calc(100% + #{$border-width});
+    left: 0;
+    background-color: #fff;
+    z-index: 99;
+
+    &.emoji-picker--block--left {
+      right: 0;
+      left: auto;
+    }
+
+    &.emoji-picker--block--right {
+      left: 0;
+      right: auto;
+    }
+  }
+
+  &--categories, &--emojis {
+    &::-webkit-scrollbar {
+      display: block;
+      width: 5px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: #e5e8e8;
+      border-right: none;
+      border-left: none;
+      border-radius: .5rem;
+    }
+  }
+
+  &--categories {
+    border-bottom: $border-width solid #DADEDF;
+  }
+
+  &--category {
+    position: relative;
+    font-size: $emoji-picker-category-icon-size;
+
+    &:after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      display: none;
+      width: 100%;
+      border-bottom: 3px solid #1F70DC;
+    }
+
+    &.selected {
+      &:after {
+        display: block;
+      }
+    }
+  }
+
+  &--category, &--emoji {
+    display: flex;
+    cursor: pointer;
+    padding: $emoji-picker-emoji-p;
+    user-select: none;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &--emojis, &--categories {
+    display: flex;
+    flex-wrap: wrap;
+    overflow: auto;
+  }
+
+  &--emojis {
+    align-content: start;
+    padding: $emoji-picker-emojis-p;
+    height: calc(100% - #{4 * $border-width} - #{2 * $emoji-picker-emoji-p} - 30px - #{2 * $emoji-picker-search-p} -
+    #{2 * $emoji-picker-search-input-p-y} - #{$emoji-picker-category-name-size * $line-height-base} - #{2 * $emoji-picker-emojis-p} - 1rem);
+
+    &--full-height {
+      height: calc(100% - #{4 * $border-width} - #{2 * $emoji-picker-emoji-p} - 30px - #{2 * $emoji-picker-search-p} -
+      #{2 * $emoji-picker-search-input-p-y} - #{2 * $emoji-picker-emojis-p} - 1rem);
+    }
+  }
+
+  &--emoji {
+    height: 30px;
+    width: 10%;
+    font-size: 1.125rem;
+  }
+}
