@@ -1,29 +1,13 @@
-import {Component, OnInit} from '@angular/core';
-
-import {IEmojiPickerOptions} from '../../../emoji-picker-lib/src/lib/@core/interfaces/data.interface';
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html'
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   public inputValue: string = '';
-  public emojiPickerOptions: IEmojiPickerOptions;
 
   constructor() {
-  }
-
-  ngOnInit(): void {
-    this.initializeEmojiPickerOptions();
-  }
-
-  private initializeEmojiPickerOptions(): void {
-    this.emojiPickerOptions = {
-      customClass: 'customClass',
-      emojisPerRow: 13,
-      emojiPickerPosition: 'left',
-      defaultCatalogId: 1
-    };
   }
 
   public selectEmoji(emoji: string): void {

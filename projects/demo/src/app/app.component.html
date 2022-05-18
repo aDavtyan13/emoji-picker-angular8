@@ -1,5 +1,4 @@
 <div class="demo-container">
   <input type="text" [(ngModel)]="inputValue">
-  <emoji-picker [emojiPickerOptions]="emojiPickerOptions"
-                (selectEmojiEvent)="selectEmoji($event)"></emoji-picker>
+  <emoji-picker (selectEmojiEvent)="selectEmoji($event)"></emoji-picker>
 </div>
